@@ -1,7 +1,13 @@
 const ACCESS_TOKEN = 'ここにChannel access tokenを貼り付ける';
 
 function doPost(e){
-  var event = JSON.parse(e.postData.contents).events[0];
+  const events = JSON.parse(e.postData.contents).events;
+  for (var i = 0; i < events.length; i++){
+    execute(events[i]);
+  }
+}
+
+function execute(event){
   if(event.type === "message"){
     if(event.message.type === "text"){
       var text = event.message.text;
